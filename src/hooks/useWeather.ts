@@ -8,7 +8,7 @@ const TXT_SELECTED_CITY:string = "selectedCity";
 export function useWeather(apiKey:string) {
     const[weather, setWeather] = useState<any>(null)
     const[loading, setLoading] = useState(true)
-    const[city, setCity] = useState(localStorage.getItem('selectedCity') || 'Tokyo');
+    const[city, _setCity] = useState(localStorage.getItem('selectedCity') || 'Tokyo');
 
     const fetchWeather = async (targetCity: string) => {
         if (!targetCity) return;
