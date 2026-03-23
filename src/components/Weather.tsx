@@ -2,9 +2,11 @@ import { useState } from "react";
 import "./Weather.css";
 import { useWeather } from "../hooks/useWeather";
 import { WeatherDisplay } from "./WeatherDisplay";
+import { Button } from "./common/Button";
+import { TextInput } from "./common/TextInput";
 
 // const TXT_DEFAULT_CITY:string = "Tokyo";
-const TXT_CHAMGE_WEATHER:string = "天気を変える";
+const TXT_CHAMGE_WEATHER:string = "Change Weather";
 const TXT_LOADING:string = "Loading...";
 const TXT_CITY_NAME:string ="City name...";
 
@@ -17,22 +19,33 @@ export function Weather({apiKey}:WeatherProps) {
     const [inputCity, setInputCity] = useState("");
     const {weather, loading, fetchWeather} = useWeather(apiKey);
 
+    const handleSearch = () => {
+        fetchWeather(inputCity);
+        setInputCity("");
+    };
+
     return(
       <div className ="weather-container">
-        <input
+
+        <TextInput
             value={inputCity}
-            onChange={(e) => setInputCity(e.target.value)}
+            onChange={setInputCity}
             placeholder={TXT_CITY_NAME}
         />
-        <button onClick={() => {fetchWeather(inputCity); setInputCity("");}} style={{marginLeft:"8px"}}>
-            {TXT_CHAMGE_WEATHER}
-        </button>
 
-        {loading ? (
-            <p>{TXT_LOADING}</p>
+        <Button
+            label={TXT_CHAMGE_WEATHER}
+            onClick={handleSearch}
+            disabled = {loading}
+        />
+
+        {
+            loading ? (
+                <p>{TXT_LOADING}</p>
             ) : (
-            weather && <WeatherDisplay data={weather} />
-            )}
+                weather && <WeatherDisplay data={weather} />
+            )
+        }
         </div>
     );
 }
