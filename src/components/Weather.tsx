@@ -5,18 +5,12 @@ import { WeatherDisplay } from "./WeatherDisplay";
 import { Button } from "./common/Button";
 import { TextInput } from "./common/TextInput";
 
-// const TXT_DEFAULT_CITY:string = "Tokyo";
 const TXT_CHAMGE_WEATHER:string = "Change Weather";
 const TXT_LOADING:string = "Loading...";
 const TXT_CITY_NAME:string ="City name...";
 const TEMP_HOT:number = 25;
 
-// 他ファイルから受け取るデータの型定義
-interface WeatherProps {
-    apiKey: string;
-}
-
-export function Weather({apiKey}:WeatherProps) {
+export function Weather({apiKey}:{apiKey:string}) {
     const [inputCity, setInputCity] = useState("");
     const {weather, loading, error, fetchWeather} = useWeather(apiKey);
     const temp = weather?.main?.temp;
@@ -42,7 +36,11 @@ export function Weather({apiKey}:WeatherProps) {
             disabled = {loading}
         />
 
-        {error && <p style={{color: '#ff4d4f', marginTop: '10px' }}>⚠️ {error}</p>}
+        {error && (
+            <p style={{color: '#ff4d4f', marginTop: '10px', fontWeight: 'bold' }}>
+                ⚠️ {error}
+            </p>
+        )}
 
         {
             loading ? (
