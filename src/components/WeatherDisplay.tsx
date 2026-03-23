@@ -1,3 +1,5 @@
+import "./WeatherDisplay.css";
+
 const TXT_TEMPERATURE_UNITS = "℃";
 
 interface WeatherDisplayProps {

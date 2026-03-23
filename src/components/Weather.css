@@ -1,7 +1,30 @@
 .weather-container {
-  margin-top: 20px;
+  padding: 20px;
+  border-radius: 12px;
+  transition: background-color 0.8s ease, border-color 0.8s ease; /* 滑らかに変化 */
+  border: 2px solid transparent;
 }
-.temp-text {
-  font-size: 2rem;
-  color: #ff8c00;
+
+/* 寒い時（または通常） */
+.weather-container.cold {
+  background-color: #e6f7ff; /* 薄い青 */
+  border-color: #91d5ff;
+}
+
+/* 暑い時 */
+.weather-container.hot {
+  background-color: #fff1f0; /* 薄い赤 */
+  border-color: #ffa39e;
+}
+
+/* 文字色もCSS側でコントロールできる */
+.hot h3 {
+  color: #cf1322;
+}
+.cold h3 {
+  color: #096dd9;
+}
+
+p {
+  color: #1d1d1d;
 }

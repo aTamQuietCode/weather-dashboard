@@ -1,22 +1,16 @@
-import {useState, useEffect} from "react";
-
-const ONE_SECOND = 1000;
+import { useTimer } from "../hooks/useTimer";
 
 export function Clock() {
-    const [time, setStime] = useState(new Date());
-
-    useEffect(() => {
-        // 1秒ごとに現在時刻を更新するタイマー
-        const timerId = setInterval(() => setStime(new Date()), ONE_SECOND);
-        return() => clearInterval(timerId);
-    }, []);
-
+    const {time} = useTimer();
+    
     // クリーンアップ：タイマー停止
     return(
-        <div style={{marginBottom:"30px"}}>
-            <h2>{time.toLocaleDateString()}</h2>
-            <div style={{fontSize:"3rem", fontWeight:"bold"}}>
-                {time.toLocaleTimeString()}
+        <div className="clock-container" style={{ textAlign: 'center', margin: '20px 0' }}>
+            <h2 style={{ fontSize: '1.2rem', color: '#666' }}>
+                {time.toLocaleDateString('ja-JP', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
+            </h2>
+            <div style={{ fontSize: '4rem', fontWeight: 'bold', fontFamily: 'monospace' }}>
+                {time.toLocaleTimeString('ja-JP')}
             </div>
         </div>
     );

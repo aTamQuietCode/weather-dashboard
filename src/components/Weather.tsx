@@ -9,6 +9,7 @@ import { TextInput } from "./common/TextInput";
 const TXT_CHAMGE_WEATHER:string = "Change Weather";
 const TXT_LOADING:string = "Loading...";
 const TXT_CITY_NAME:string ="City name...";
+const TEMP_HOT:number = 25;
 
 // 他ファイルから受け取るデータの型定義
 interface WeatherProps {
@@ -17,7 +18,9 @@ interface WeatherProps {
 
 export function Weather({apiKey}:WeatherProps) {
     const [inputCity, setInputCity] = useState("");
-    const {weather, loading, fetchWeather} = useWeather(apiKey);
+    const {weather, loading, error, fetchWeather} = useWeather(apiKey);
+    const temp = weather?.main?.temp;
+    const weatherClass = temp !== undefined && temp >= TEMP_HOT ? "weather-container hot" : "weather-container cold";
 
     const handleSearch = () => {
         fetchWeather(inputCity);
@@ -25,7 +28,7 @@ export function Weather({apiKey}:WeatherProps) {
     };
 
     return(
-      <div className ="weather-container">
+      <div className ={weatherClass}>
 
         <TextInput
             value={inputCity}
@@ -38,6 +41,8 @@ export function Weather({apiKey}:WeatherProps) {
             onClick={handleSearch}
             disabled = {loading}
         />
+
+        {error && <p style={{color: '#ff4d4f', marginTop: '10px' }}>⚠️ {error}</p>}
 
         {
             loading ? (
