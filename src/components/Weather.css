@@ -5,16 +5,25 @@
   border: 2px solid transparent;
 }
 
+.weather-container.night {
+  --theme-color: #f1c40f; /* 月の色 */
+  --bg-soft: rgba(44, 62, 80, 0.5);
+}
+
 /* 寒い時（または通常） */
 .weather-container.cold {
   background-color: #e6f7ff; /* 薄い青 */
   border-color: #91d5ff;
+  --theme-color: #c8e6ff;
+  --bg-soft: rgba(200, 230, 255, 0.3);
 }
 
 /* 暑い時 */
 .weather-container.hot {
   background-color: #fff1f0; /* 薄い赤 */
   border-color: #ffa39e;
+  --theme-color: #ffcfa4;
+  --bg-soft: rgba(255, 200, 200, 0.3);
 }
 
 /* 文字色もCSS側でコントロールできる */
@@ -25,6 +34,8 @@
   color: #096dd9;
 }
 
-p {
-  color: #1d1d1d;
+.error-messag p {
+  color: '#ff4d4f';
+  margin-top: '10px';
+  font-weight: 'bold';
 }

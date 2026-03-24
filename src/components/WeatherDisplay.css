@@ -1,5 +1,26 @@
+/* 夜のテーマ：ブラウザの反転に負けない色にする */
+.night-theme {
+  padding: 5px;
+  border-radius: 12px;
+  background-color: var(--theme-color);
+  color: #2c3e50;
+}
+
+.night-theme .weather-icon {
+  /* 重要：ブラウザが勝手に黒くしたなら、ここで白に戻す */
+  filter: brightness(0) invert(1) !important; 
+  border-radius: 50%;
+}
+
+/* 昼のテーマ */
+.day-theme {
+  padding: 5px;
+  border-radius: 12px;
+  background-color: var(--theme-color);
+  color: #2c3e50;
+}
+
 /* WeatherDisplay.tsx 内の img タグに対するスタイル */
 .display-area img {
-  /* 重要：これを入れると、画像の「型抜き」部分に沿って影がつきます */
   filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.5)); 
 }

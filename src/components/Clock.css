@@ -1,0 +1,27 @@
+.clock-container {
+    text-align: center;
+    margin: 15px 0;
+    padding: 15px;
+    /* ほんのり白く透ける背景 */
+    background-color: rgba(255, 255, 255, 0.4); 
+    border-radius: 12px;
+    /* 軽い影をつけると「浮き出し」て見える */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+p.date {
+    margin: 0;
+    color: #444444; /* 濃いグレー */
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+h1.time {
+    margin: 5px 0 0 0;
+    font-size: 2.8rem;
+    /* 数字の幅を固定してガタつきを抑える */
+    font-family: 'Courier New', Courier, monospace; 
+    color: #1a1a2e; /* 非常に濃い紺 */
+    letter-spacing: 2px;
+    font-weight: bold;
+}
