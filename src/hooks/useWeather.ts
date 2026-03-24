@@ -4,6 +4,7 @@ const URL_OPENWEATHERMAP = "https://api.openweathermap.org/data/2.5/weather";
 const ERR_NOT_FOUND_CITY:string = "Not found the Cit. Please enter a valid name.";
 const TXT_SELECTED_CITY:string = "selectedCity";
 const CITY_INITIAL:string = "Tokyo";
+const LANG_WEATHER:string = "ja";
 
 export function useWeather(apiKey:string) {
     const[weather, setWeather] = useState<any>(null)
@@ -16,7 +17,7 @@ export function useWeather(apiKey:string) {
         setLoading(true);
         setError(null); // Reset the previous error when communication begins
         
-        const url = `${URL_OPENWEATHERMAP}?q=${targetCity}&appid=${apiKey}&units=metric&lang=ja`;
+        const url = `${URL_OPENWEATHERMAP}?q=${targetCity}&appid=${apiKey}&units=metric&lang=${LANG_WEATHER}`;
 
         try {
             const response = await fetch(url);
