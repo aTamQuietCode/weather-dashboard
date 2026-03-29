@@ -34,8 +34,8 @@
   color: #096dd9;
 }
 
-.error-messag p {
-  color: '#ff4d4f';
+.error-messag {
+  color: #444444;
   margin-top: '10px';
   font-weight: 'bold';
 }

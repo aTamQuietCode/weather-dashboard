@@ -2,23 +2,18 @@ import "./App.css";
 import { Weather } from "./components/Weather";
 import {WeatherProvider} from "./contexts/WeatherContext";
 
-const API_KEY:string = "60906c90c0a127df7370bd0aca69cc21";
-//const TXT_TITLE:string = "Weather Dashboard";
+const TXT_TITLE:string = "Weather Dashboard";
+const API_KEY:string = import.meta.env.VITE_OPENWEATHER_API_KEY;
 
 function App() {
+  console.log("読み込まれたAPIキー:", API_KEY);
   return(
     <WeatherProvider>
       <div className="app-container">
-        <h1>Weather Dashboard</h1>
+        <h1>{TXT_TITLE}</h1>
         <Weather  apiKey={API_KEY} />
       </div>
     </WeatherProvider>
-    /*
-    <div className="app-layout">
-      <h1>{TXT_TITLE}</h1>
-      <Weather apiKey={API_KEY} />
-    </div>
-    */
   );
 }
 
