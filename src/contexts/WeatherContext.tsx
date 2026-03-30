@@ -15,28 +15,28 @@ const WeatherContext = createContext<WeatherContextType | undefined>(undefined);
 
 export const WeatherProvider = ({children}:{children:ReactNode}) => {
     const [currentWeather, setCurrentWeather] = useState<WeatherData | null>(null);
-    const [history, setHistory] = useState<SearchHistory[]>([]);
-
-    // Read history from localStorage at startup.
-    useEffect(() =>{
+    
+    // 1. Load from localStorage on initialization
+    const [history, setHistory] = useState<SearchHistory[]>(() => {
         const saved = localStorage.getItem("weather_history");
-        if (saved) {
-            setHistory(JSON.parse(saved));
-        }
-    }, []);
+        return saved ? JSON.parse(saved) : [];
+    });
 
-    // A function to add history and save it to localStorage.
-    const addToHistory = (city:string) => {
+    // 2. Automatically save when history is updated
+    useEffect(() =>{
+        localStorage.setItem("weather_history", JSON.stringify(history));
+    }, [history]);
+
+    // 3. Function to add history (leave the saving process to useEffect)
+    const addToHistory = (city: string) => {
         setHistory((prev) => {
-            // Remove duplicates and place the most recent at the top.
             const filtered = prev.filter((item) => item.city !== city);
-            const newHistory = [{city, timestamp:Date.now()}, ...filtered].slice(0, MAX_ITEMS);
-            localStorage.setItem("weather-history", JSON.stringify(newHistory));
-            return newHistory;
+            // slice(0, MAX_ITEMS) で最大数を維持
+            return [{ city, timestamp: Date.now() }, ...filtered].slice(0, MAX_ITEMS);
         });
     };
 
-    return(
+    return (
         <WeatherContext.Provider value={{currentWeather, setCurrentWeather, history, addToHistory}}>
             {children}
         </WeatherContext.Provider>
